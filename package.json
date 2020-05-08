@@ -1,0 +1,19 @@
+{
+  "name": "codeblood",
+  "version": "1.0.0",
+  "description": "online ide",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agrawalsajal02/CodeBlood.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agrawalsajal02/CodeBlood/issues"
+  },
+  "homepage": "https://github.com/agrawalsajal02/CodeBlood#readme"
+}
