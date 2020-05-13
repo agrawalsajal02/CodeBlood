@@ -1,0 +1,87 @@
+.main-header{
+    font-family: 'Crimson Text', serif;
+    margin: 0px;
+    width:100%;
+    padding:8px 16px;
+    background-color: #2ddf5c;
+font-size: 20px;
+}
+
+.main-header-left-item,.main-nav__item{
+    margin:0px 5px;
+display: inline-block;
+}
+.main-header-left{
+    margin:0px 20px;
+}
+.main-header-left-item{
+    vertical-align: middle;
+    margin: 0px 10px;
+    margin-left: 30px;
+    
+}
+.main-nav__item{
+    margin-right: 60px;
+}
+.main-header-left-item a,.main-nav__item a{
+    text-decoration: none;
+font-weight: bold; 
+}
+.main-header > div{
+    display: inline-block;
+}
+
+.main-nav{
+    vertical-align: middle;
+    text-align: right;
+    width: calc(100% - 500px);
+    display: inline-block;
+}
+
+.main-nav__items,.main-header-lefts{
+margin:0;
+padding: 0;
+list-style: none;
+}
+.main-header-lefts{
+padding: 0px 70px;
+}
+.main-nav__item{
+    box-sizing: border-box;
+    border:2px red solid;
+    padding:4px 16px;
+    border-radius: 8px;
+background-color: blue;
+}
+.main-nav__item a{
+color:white;
+
+}
+
+
+.main-nav__item:hover,.main-nav__item:active{
+color:black;
+background: red;
+border-bottom: white 2px solid;
+}
+.main-nav__item a:hover,.main-nav__item a:active{
+    color:black;
+    text-decoration: none;
+}
+.main-header-left-item a:hover,.main-header-left-item a:active{
+color:white;
+border-bottom: white 4px solid;
+text-decoration: none;
+}
+
+.main-header-brand{
+    margin: 0px;
+    display: inline-block;
+text-decoration: none;
+border: none!important;
+}
+.main-header-brand:hover{
+    text-decoration: none;
+    border: none!important;
+    }
+    
