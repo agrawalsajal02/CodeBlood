@@ -6,10 +6,11 @@ import Nav from "./Components/Navbar/Nav";
 import Ide from "./Components/ide/Ide";
 import Aboutus from "./Components/Aboutus/Aboutus"
 import Contactus from "./Components/contactus/Contactus"
-import Login from "./Components/login/Login"
 import Recent from "./Components/Recent/Recent"
 import { Route, Switch } from "react-router-dom";
+import Login from "./Components/login/Login"
 import Show from "./Components/Show"
+import firebase from "./config/fbconfig";
 function App() {
   return (
     <div className="App">
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/recent" component={Recent} />
         <Route path="/show" component={Show} />
+
       
       </Switch>
       <Footer />
