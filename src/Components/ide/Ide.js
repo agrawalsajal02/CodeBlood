@@ -41,6 +41,7 @@ function Ide(props) {
   const [progressbar, setprogressbar] = useState(0);
   const handlebar = (event) => {
     setCode(event.currentTarget.value);
+    //console.log(Code);
   };
 
   const handlebar2 = (event) => {
@@ -49,6 +50,7 @@ function Ide(props) {
 
   const onLanguageSelectChange = (event) => {
     setLang(event.currentTarget.value);
+    //  console.log("curr target ", event.currentTarget.value,event.target.value,Lang);
   };
   const buttonsubmit = () => {
     var t = 0;
@@ -79,7 +81,7 @@ function Ide(props) {
       method: "POST",
       url: "/v3/code/run/",
       data: bodyFormData,
-      header: { "Content-Type": `application/json` },
+      header: { "Content-Type": `multipart/form-data` },
     })
       .then((response) => {
         if (response.data.compile_status === "OK") {
@@ -93,9 +95,7 @@ function Ide(props) {
           };
           props.onsubmission(da);
           console.log("in if");
-          Axios.post("https://codeblood-ac5c2.firebaseio.com/order.json", da, {
-            header: { "Content-Type": `application/json` },
-          })
+          Axios.post("https://codeblood-ac5c2.firebaseio.com/order.json", da)
             .then((response) => {
               console.log("successfully stored");
             })
