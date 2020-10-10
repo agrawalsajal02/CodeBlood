@@ -79,9 +79,9 @@ function Ide(props) {
     bodyFormData.set("memory_limit", "262144");
     Axios({
       method: "POST",
-      url: "/v3/code/run/",
+      url: "https://api.hackerearth.com/v3/code/run/",
       data: bodyFormData,
-      header: { "Content-Type": `multipart/form-data` },
+      header: { "Content-Type": "application/json" },
     })
       .then((response) => {
         if (response.data.compile_status === "OK") {
@@ -107,9 +107,9 @@ function Ide(props) {
           console.log("in else");
           Axios({
             method: "POST",
-            url: "/v3/code/compile/",
+            url: "https://api.hackerearth.com/v3/code/compile/",
             data: bodyFormData,
-            header: { "Content-Type": `multipart/form-data` },
+            header: { "Content-Type": "application/json" },
           })
             .then((response) => {
               setoutput(response.data.compile_status);
@@ -124,7 +124,8 @@ function Ide(props) {
               props.onsubmission(da);
               Axios.post(
                 "https://codeblood-ac5c2.firebaseio.com/order.json",
-                da
+                da,
+                { header: { "Content-Type": "application/json" } }
               )
                 .then((response) => {
                   console.log("successfully stored");
@@ -138,43 +139,12 @@ function Ide(props) {
               setprogressbar(0);
             });
         }
-        console.log("succewss ", response);
       })
       .catch((error) => {
         setoutput(error + "\n Check your code again");
         console.log(error);
         setprogressbar(0);
       });
-
-    //Axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
-    //console.log(Axios.defaults.headers);
-
-    //     Axios({
-    //       url:"https://api.hackerearth.com/v3/code/run",
-    //       method:"post",
-    //       data:data,
-    //       header:{
-    //         'Content-Type': 'multipart/form-data',
-    //         "Access-Control-Allow-Origin":"http://localhost:3000"
-    //       }
-    //     }).then(response=>{
-    //       setoutput(response);
-    //       console.log(response);
-    //     }).catch(error=>{
-    //       setoutput(error);
-    // console.log(error);
-    //     })
-
-    // Axios.post("https://api.hackerearth.com/v3/code/run/", data)
-    //   .then((response) => {
-    //     setoutput(response.data);
-    //     console.log(response, response.data, response.data.message);
-    //   })
-    //   .catch((error) => {
-    //     setoutput(error);
-    //     console.log(error);
-    //   });
-    //
   };
   return (
     <div className="ide_min_div">
