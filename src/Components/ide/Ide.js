@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ide.css";
 import { Form, Row, Col, Container } from "react-bootstrap";
 import Axios from "axios";
-import {connect} from "react-redux"
+import { connect } from "react-redux";
 import { ProgressBar } from "react-bootstrap";
 //import {useDispatch} from "react-redux"
 import submission from "../../actions/user_actions";
@@ -41,7 +41,6 @@ function Ide(props) {
   const [progressbar, setprogressbar] = useState(0);
   const handlebar = (event) => {
     setCode(event.currentTarget.value);
-    //console.log(Code);
   };
 
   const handlebar2 = (event) => {
@@ -50,7 +49,6 @@ function Ide(props) {
 
   const onLanguageSelectChange = (event) => {
     setLang(event.currentTarget.value);
-    //  console.log("curr target ", event.currentTarget.value,event.target.value,Lang);
   };
   const buttonsubmit = () => {
     var t = 0;
@@ -67,7 +65,6 @@ function Ide(props) {
       setprogressbar(t);
     }, 2);
 
-
     var bodyFormData = new FormData();
     bodyFormData.set(
       "client_secret",
@@ -82,7 +79,7 @@ function Ide(props) {
       method: "POST",
       url: "/v3/code/run/",
       data: bodyFormData,
-      header: { "Content-Type": `multipart/form-data` },
+      header: { "Content-Type": `application/json` },
     })
       .then((response) => {
         if (response.data.compile_status === "OK") {
@@ -95,18 +92,19 @@ function Ide(props) {
             Output: response.data.run_status.output,
           };
           props.onsubmission(da);
-         console.log("in if")
-          Axios.post("https://codeblood-ac5c2.firebaseio.com/order.json", da)
+          console.log("in if");
+          Axios.post("https://codeblood-ac5c2.firebaseio.com/order.json", da, {
+            header: { "Content-Type": `application/json` },
+          })
             .then((response) => {
               console.log("successfully stored");
-              
             })
             .catch((error) => {
               console.log("not stored in resonse");
             });
           //dispatch(submission(da));
         } else {
-          console.log("in else")
+          console.log("in else");
           Axios({
             method: "POST",
             url: "/v3/code/compile/",
@@ -116,7 +114,7 @@ function Ide(props) {
             .then((response) => {
               setoutput(response.data.compile_status);
               setprogressbar(0);
-              
+
               const da = {
                 data: Code,
                 lang: Lang,
@@ -124,17 +122,16 @@ function Ide(props) {
                 Output: response.data.run_status.output,
               };
               props.onsubmission(da);
-              Axios.post("https://codeblood-ac5c2.firebaseio.com/order.json", da)
+              Axios.post(
+                "https://codeblood-ac5c2.firebaseio.com/order.json",
+                da
+              )
                 .then((response) => {
                   console.log("successfully stored");
                 })
                 .catch((error) => {
                   console.log("not stored in resonse");
                 });
-      
-       
-
-
             })
             .catch((error) => {
               setoutput(error);
@@ -241,13 +238,10 @@ function Ide(props) {
   );
 }
 
+const mapdispatchtoprops = (dispatch) => {
+  return {
+    onsubmission: (data) => dispatch({ type: "submission", payload: data }),
+  };
+};
 
-
-
-const mapdispatchtoprops  =dispatch=>{
-return {
-  onsubmission:(data)=>dispatch({type:"submission",payload:data})
-}
-}
-
-export default connect(null,mapdispatchtoprops)(Ide);
+export default connect(null, mapdispatchtoprops)(Ide);
